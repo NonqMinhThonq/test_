@@ -22,5 +22,5 @@ def classify_students(class_data):
                 younger_students.append(student)
     return f'Lớp {cls} có {student} học sinh. trong đó {len(older_students)} học sinh lớn hơn tuổi trung bình và {len(younger_students)} học sinh nhỏ hơn tuổi trung bình.'
 
-for class_info in classes:
-    print(classify_students(class_info))
+    
+print(classify_students(classes))
