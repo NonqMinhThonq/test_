@@ -20,7 +20,7 @@ def classify_students(class_data):
                 older_students.append(student)
             elif student < threshold_low:
                 younger_students.append(student)
-    return f'Lớp {cls} có {student} học sinh. trong đó {older_students} học sinh lớn hơn {threshold_high} tháng và {younger_students} học sinh nhỏ hơn {threshold_low} tháng.'
+    return f'Lớp {cls} có {student} học sinh. trong đó {len(older_students)} học sinh lớn hơn tuổi trung bình và {len(younger_students)} học sinh nhỏ hơn tuổi trung bình.'
 
 for class_info in classes:
     print(classify_students(class_info))
