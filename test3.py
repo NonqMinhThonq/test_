@@ -1,26 +1,37 @@
-# giả định tất cả các cho sinh của 20 lớp sẽ nằm trong list classes
-classes = [
-]
-age = 'số tuổi'
-month = 'tháng'
+import random
+
+# Số lớp và số học sinh trong mỗi loại lớp
+classes = {
+    '35_students': 5,
+    '45_students': 6,
+    '30_students': 10,
+    '40_students': 4
+}
+
+# Tuổi trung bình là 20 năm và 8 tháng
 average_age_months = 20 * 12 + 8
-threshold_high = average_age_months + 6
-threshold_low = average_age_months - 6
 
-def classify_students(class_data):
-    """Hàm phân loại học sinh lớn hơn hoặc nhỏ hơn ngưỡng tuổi
-       classes là tổng số lớp 
-       cls là 1 lớp cụ thể 
-       student là số học sinh trong cls"""
-    for cls in classes:
-        for student in cls:
-            older_students = [], younger_students = []
-            student = age * 12 + month
-            if student > threshold_high:
-                older_students.append(student)
-            elif student < threshold_low:
-                younger_students.append(student)
-    return f'Lớp {cls} có {student} học sinh. trong đó {len(older_students)} học sinh lớn hơn tuổi trung bình và {len(younger_students)} học sinh nhỏ hơn tuổi trung bình.'
+# Ngưỡ tuổi lớn hơn và nhỏ hơn 6 tháng so với tuổi trung bình
+upper_age_months = average_age_months + 6
+lower_age_months = average_age_months - 6
 
-    
-print(classify_students(classes))
+# Tạo danh sách tuổi cho mỗi lớp
+def generate_ages(num_students):
+    return [random.randint(12 * 12, 22 * 12) for _ in range(num_students)]
+
+# Đếm số học sinh có tuổi lớn hơn hoặc nhỏ hơn ngưỡ tuổi
+def count_students(ages, lower, upper):
+    above = sum(1 for age in ages if age > upper)
+    below = sum(1 for age in ages if age < lower)
+    return above, below
+
+# Tính toán cho mỗi lớp
+for class_type, num_classes in classes.items():
+    num_students = int(class_type.split('_')[0])
+    print(f"{class_type}: {num_classes} classes, {num_students} students each")
+    for class_num in range(1, num_classes + 1):
+        ages = generate_ages(num_students)
+        above, below = count_students(ages, lower_age_months, upper_age_months)
+        print(f"  Class {class_num}:")
+        print(f"    Students above average age: {above}")
+        print(f"    Students below average age: {below}")
